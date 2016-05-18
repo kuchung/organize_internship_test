@@ -1,0 +1,80 @@
+Question 1
+
+import string
+
+with open("textSample.txt", "r") as f:
+    textlist = f.read().split()
+
+words = []
+
+for word in textlist:
+    word = "".join(ch for ch in word if ch not in set(string.punctuation)).lower()
+    words.append(word)
+
+leftovers = []
+
+for word in words:
+    leftover = word.translate(None, "rstlnaeiou")
+
+    if len(leftover) <= 1:
+        leftovers.append(word)
+    elif leftover == len(leftover) * leftover[0]:
+        leftovers.append(word)
+
+leftovers.sort(key = len, reverse = True)
+
+print leftovers
+
+leftovers_count = {}
+
+for word in leftovers:
+    if word in leftovers_count:
+        leftovers_count[word] += 1
+    else:
+        leftovers_count[word] = 1
+
+leftovers_common = sorted(leftovers_count, key = leftovers_count.get, reverse = True)
+
+print leftovers_common[0]
+
+
+
+
+
+
+
+
+question2
+
+
+import random
+
+list1 = random.sample(range(1, 1001), 3)
+list2 = random.sample(range(1, 1001), 3)
+list3 = random.sample(range(1, 1001), 3)
+
+print list1
+print list2
+print list3
+
+list4 = sorted(list(set(list1 + list2 + list3)), reverse = True)
+
+print list4
+
+for i in list4:
+    if i % 5 == 0 and i % 2 == 0:
+        list4[list4.index(i)] = "grapefruit"
+    elif i % 5 == 0:
+        list4[list4.index(i)] = 5
+    elif i % 2 == 0:
+        list4[list4.index(i)] = 2
+
+print list4
+
+for n, i in enumerate(list4):
+    if i == "grapefruit":
+        list4[n] = 2
+    elif i == 2:
+        list4[n] = "grapefruit"
+
+print list4
